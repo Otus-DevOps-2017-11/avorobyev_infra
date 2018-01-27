@@ -1,0 +1,27 @@
+{
+  "builders": [
+    {
+    "type": "googlecompute",
+    "project_id": "mindful-atlas-188816",
+    "image_name": "reddit-base-{{timestamp}}",
+    "image_family": "reddit-base",
+    "source_image_family": "ubuntu-1604-lts",
+    "zone": "europe-west1-d",
+    "ssh_username": "appuser",
+    "machine_type": "f1-micro"
+    }
+  ],
+  "provisioners": [
+      {
+        "type": "file",
+        "source": "scripts/libfunc.sh",
+        "destination": "/home/appuser/libfunc.sh"
+      },
+      {
+        "type": "shell",
+        "inline": [
+          "sudo bash -c 'cd /home/appuser && . libfunc.sh && ruby_tasks && mongo_tasks'"
+        ]
+      }
+  ]
+}
