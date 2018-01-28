@@ -1,5 +1,5 @@
 
-WORKDIR=. 
+WORKDIR=$PWD
 
 function install_ruby {
   apt update && \
@@ -41,6 +41,19 @@ function start_app {
     sleep 3
     ps -aux | grep puma || echo "puma seems dead ((("
   }
+}
+
+
+function register_app_with_systemd {
+
+  local _srvdesc_uri=https://gist.githubusercontent.com/Nklya/5db89c8ae4613fe1609fe87f2cdb0203/raw/7dccf8a0f1352dd865f955706085993a203f6ae7/puma.service
+  local _srvdesc_dir=/etc/systemd/system
+
+  local _srvdesc_file=$(basename $_srvdesc_uri)
+
+  wget "$_srvdesc_uri" -O "$_srvdesc_dir/$_srvdesc_file"
+
+  systemctl enable puma
 }
 
 
