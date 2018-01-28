@@ -1,27 +1,37 @@
 {
+
+  "variables": {
+    "gcp_project_id": "mindful-atlas-188816",
+    "gcp_src_image_family": "ubuntu-1604-lts",
+    "machine_type": "f1-micro",
+    "workdir": "/home/appuser"
+  },
   "builders": [
     {
     "type": "googlecompute",
-    "project_id": "mindful-atlas-188816",
+    "project_id": "{{user `gcp_project_id`}}",
     "image_name": "reddit-base-{{timestamp}}",
     "image_family": "reddit-base",
-    "source_image_family": "ubuntu-1604-lts",
+    "source_image_family": "{{user `gcp_src_image_family`}}",
     "zone": "europe-west1-d",
     "ssh_username": "appuser",
-    "machine_type": "f1-micro"
+    "machine_type": "{{user `machine_type`}}"
     }
   ],
   "provisioners": [
       {
         "type": "file",
         "source": "scripts/libfunc.sh",
-        "destination": "/home/appuser/libfunc.sh"
+        "destination": "{{user `workdir`}}/libfunc.sh"
       },
       {
         "type": "shell",
         "inline": [
-          "sudo bash -c 'cd /home/appuser && . libfunc.sh && ruby_tasks && mongo_tasks'"
-        ]
+          ". libfunc.sh && ruby_tasks && mongo_tasks"
+        ],
+        "remote_folder": "{{user `workdir`}}",
+        "execute_command": "sudo {{.Path}}",
+        "inline_shebang": "/bin/bash"
       }
   ]
 }
