@@ -15,7 +15,12 @@
     "source_image_family": "{{user `gcp_src_image_family`}}",
     "zone": "europe-west1-d",
     "ssh_username": "appuser",
-    "machine_type": "{{user `machine_type`}}"
+    "machine_type": "{{user `machine_type`}}",
+    "image_description": "reddit app ubuntu image",
+    "disk_size": 10,
+    "disk_type": "pd-standard",
+    "network": "default",
+    "tags": "puma-server"
     }
   ],
   "provisioners": [
@@ -30,6 +35,7 @@
           ". libfunc.sh && ruby_tasks && mongo_tasks"
         ],
         "remote_folder": "{{user `workdir`}}",
+        "remote_file": "installer.sh",
         "execute_command": "sudo {{.Path}}",
         "inline_shebang": "/bin/bash"
       }
