@@ -35,30 +35,14 @@
       {
         "type": "shell",
         "inline": [
-          ". libfunc.sh && ruby_tasks && mongo_tasks"
+          ". libfunc.sh",
+          "as_root mongo_tasks",
+          "as_root mongo_tasks",
+          "app_tasks",
+          "as_root register_app_with_systemd"
         ],
         "remote_folder": "{{user `workdir`}}",
-        "remote_file": "install_ruby_mongo.sh",
-        "execute_command": "sudo {{.Path}}",
-        "inline_shebang": "/usr/bin/env bash"
-      },
-      {
-        "type": "shell",
-        "inline": [
-          ". libfunc.sh && app_tasks"
-        ],
-        "remote_folder": "{{user `workdir`}}",
-        "remote_file": "install_app.sh",
-        "inline_shebang": "/usr/bin/env bash"
-      },
-      {
-        "type": "shell",
-        "inline": [
-          ". libfunc.sh && register_app_with_systemd"
-        ],
-        "remote_folder": "{{user `workdir`}}",
-        "remote_file": "app_as_a_service.sh",
-        "execute_command": "sudo {{.Path}}",
+        "remote_file": "installer.sh",
         "inline_shebang": "/usr/bin/env bash"
       }
   ]

@@ -1,0 +1,10 @@
+{
+  "gcp_project_id": "my-project-id",
+  "gcp_src_image_family": "my-favorite-images",
+  "gcp_machine_type": "as-big-as-possible",
+  "gcp_disk_size": "500",
+  "gcp_disk_type": "fastest",
+  "gcp_network": "default",
+  "gcp_tags": "money-hog",
+  "workdir": "/tmp"
+}
