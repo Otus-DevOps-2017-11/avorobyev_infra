@@ -1,10 +1,9 @@
 {
-
   "variables": {
-    "gcp_project_id": "mindful-atlas-188816",
-    "gcp_src_image_family": "ubuntu-1604-lts",
-    "machine_type": "f1-micro",
-    "workdir": "/home/appuser"
+    "gcp_project_id": "",
+    "gcp_src_image_family": "",
+    "gcp_machine_type": "",
+    "workdir": ""
   },
   "builders": [
     {
@@ -15,7 +14,7 @@
     "source_image_family": "{{user `gcp_src_image_family`}}",
     "zone": "europe-west1-d",
     "ssh_username": "appuser",
-    "machine_type": "{{user `machine_type`}}",
+    "machine_type": "{{user `gcp_machine_type`}}",
     "image_description": "reddit app ubuntu image",
     "disk_size": 10,
     "disk_type": "pd-standard",

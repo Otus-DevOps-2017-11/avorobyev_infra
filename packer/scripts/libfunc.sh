@@ -37,10 +37,12 @@ function start_app {
 
   local _app_home=$WORKDIR/reddit
 
-  cd $_app_home && puma -d && {
-    sleep 3
-    ps -aux | grep puma || echo "puma seems dead ((("
-  }
+  (#run in subshell to avoid dir change
+    cd $_app_home && puma -d && {
+      sleep 3
+      ps -aux | grep puma || echo "puma seems dead ((("
+    }
+  )
 }
 
 
@@ -59,15 +61,22 @@ function register_app_with_systemd {
 
 function ruby_tasks {
 
-  install_ruby && show_ruby
+  install_ruby && show_ruby || exit $?
 }
 
 function mongo_tasks {
 
-  install_mongo && start_mongo && show_mongo
+  install_mongo && start_mongo && show_mongo || exit $?
 }
 
 function app_tasks {
 
-  install_app && start_app
+  install_app && start_app || exit $?
+}
+
+function as_root {
+
+  local in_coderef=$1
+
+  sudo bash -c ". ${WORKDIR}/libfunc.sh && $in_coderef" || exit $?
 }
