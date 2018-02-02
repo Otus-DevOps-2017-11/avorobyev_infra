@@ -1,0 +1,49 @@
+{
+  "variables": {
+    "gcp_project_id": "",
+    "gcp_src_image_family": "",
+    "gcp_machine_type": "",
+    "gcp_disk_size": "",
+    "gcp_disk_type": "",
+    "gcp_network": "",
+    "gcp_tags": "",
+    "workdir": ""
+  },
+  "builders": [
+    {
+    "type": "googlecompute",
+    "project_id": "{{user `gcp_project_id`}}",
+    "image_name": "reddit-full-{{timestamp}}",
+    "image_family": "reddit-full",
+    "source_image_family": "{{user `gcp_src_image_family`}}",
+    "zone": "europe-west1-d",
+    "ssh_username": "appuser",
+    "machine_type": "{{user `gcp_machine_type`}}",
+    "image_description": "reddit app ubuntu image",
+    "disk_size": "{{user `gcp_disk_size`}}",
+    "disk_type": "{{user `gcp_disk_type`}}",
+    "network": "{{user `gcp_network`}}",
+    "tags": "{{user `gcp_tags`}}"
+    }
+  ],
+  "provisioners": [
+      {
+        "type": "file",
+        "source": "scripts/libfunc.sh",
+        "destination": "{{user `workdir`}}/libfunc.sh"
+      },
+      {
+        "type": "shell",
+        "inline": [
+          ". libfunc.sh",
+          "as_root mongo_tasks",
+          "as_root mongo_tasks",
+          "app_tasks",
+          "as_root register_app_with_systemd"
+        ],
+        "remote_folder": "{{user `workdir`}}",
+        "remote_file": "installer.sh",
+        "inline_shebang": "/usr/bin/env bash"
+      }
+  ]
+}

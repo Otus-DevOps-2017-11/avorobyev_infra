@@ -71,6 +71,45 @@ gcloud compute firewall-rules create default-puma-server \
 
 ```
 
+# Задание 7
 
+Продолжил развивать идею библиотеки функций. IMHO удобней так, чем с кучей sh файлов. Это позволило поэкспериментировать с inline скриптами, через которые эти функции вызываются.
 
+## Работа с секцией переменных шаблона
 
+Добавлены переменные:
+
+* gcp_project_id
+* gcp_src_image_family
+* machine_type
+* workdir
+
+## Расширение параметров GCP builder
+
+Добавлены парамеры:
+
+* image_description
+* disk_size
+* disk_type
+* network
+* tags
+
+## Дополнительные задачи
+
+### Полный образ
+
+В секцию provisioners базового шаблона добалена сборка приложения (не под root!) и регистация в системе управления сервисами ОС. Реализация последнего подсмотрена у коллег ;)   
+
+### Развертывание vm
+packer/scripts/creare_reddit-vm.sh:
+```bash
+#!/bin/bash
+
+gcloud compute instances create reddit-app \
+  --boot-disk-size=10GB \
+  --image-family reddit-full \
+  --image-project=mindful-atlas-188816 \
+  --machine-type=f1-micro \
+  --tags puma-server \
+  --restart-on-failure
+```
