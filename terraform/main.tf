@@ -1,22 +1,21 @@
 provider "google" {
   #version     = "1.4.0"
-  project     = "mindful-atlas-188816"
-  region      = "us-central1"
+  project     = "${var.project}"
+  region      = "${var.region}"
 }
 
 resource "google_compute_instance" "app" {
 
   name = "reddit-app"
   machine_type = "g1-small"
-  zone = "europe-west1-b"
+  zone = "${var.zone}"
 
   tags =[ "reddit-app" ]
 
   # определение загрузочного диска
-
   boot_disk {
     initialize_params {
-      image = "reddit-base"
+      image = "${var.disk_image}"
     }
   }
 
@@ -32,14 +31,14 @@ resource "google_compute_instance" "app" {
 
   #ключи
   metadata {
-    sshKeys = "appuser:${file("~/.ssh/appuser.pub")}"
+    sshKeys = "appuser:${file(var.keys["public"])}"
   }
 
   connection {
     type = "ssh"
     user = "appuser"
     agent = false
-    private_key = "${file("~/.ssh/appuser")}"
+    private_key = "${file(var.keys["private"])}"
   }
 
   provisioner "file" {

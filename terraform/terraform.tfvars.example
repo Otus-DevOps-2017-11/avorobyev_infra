@@ -1,0 +1,8 @@
+project = "mindful-atlas-188816"
+
+disk_image = "reddit-base"
+
+keys = {
+  "private" = "~/.ssh/appuser",
+  "public" = "~/.ssh/appuser.pub"
+}
