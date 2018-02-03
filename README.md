@@ -115,3 +115,17 @@ gcloud compute instances create reddit-app \
   --tags puma-server \
   --restart-on-failure
 ```
+
+# Задание 8
+
+Ключи добавил через переменную типа machine_type
+
+## Дополнительные задачи
+
+### 1. Ключи проекта
+
+Управляются через ресурс google_compute_project_metadata_item. Имя элемента ssh-keys.
+
+Ключ, добавленный вручную удалился, так как Terraform не следит за ресурсами, о которых не знает. Что логично )
+
+### 2
