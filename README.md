@@ -118,7 +118,7 @@ gcloud compute instances create reddit-app \
 
 # Задание 8
 
-Ключи добавил через переменную типа machine_type
+Ключи добавил через переменную типа map
 
 ## Дополнительные задачи
 
