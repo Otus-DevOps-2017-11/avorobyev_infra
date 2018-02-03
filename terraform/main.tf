@@ -29,10 +29,10 @@ resource "google_compute_instance" "app" {
     access_config {}
   }
 
-  #ключи
-  metadata {
-    sshKeys = "appuser:${file(var.keys["public"])}"
-  }
+  ##ключи
+  #metadata {
+  #  sshKeys = "appuser:${file(var.keys["public"])}"
+  #}
 
   connection {
     type = "ssh"
@@ -69,4 +69,13 @@ resource "google_compute_firewall" "firewall_puma" {
 
   # Правило применимо для инстансов с тегом ...
   target_tags = ["reddit-app"]
+}
+
+resource "google_compute_project_metadata_item" "project_keys" {
+  key = "ssh-keys"
+  value = <<EOF
+appuser: ${file(var.keys["public"])}
+appuser1: ${file(var.keys["public"])}
+appuser2: ${file(var.keys["public"])}
+EOF
 }
