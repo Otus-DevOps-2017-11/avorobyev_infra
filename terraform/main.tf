@@ -74,8 +74,8 @@ resource "google_compute_firewall" "firewall_puma" {
 resource "google_compute_project_metadata_item" "project_keys" {
   key = "ssh-keys"
   value = <<EOF
-appuser: ${file(var.keys["public"])}
-appuser1: ${file(var.keys["public"])}
-appuser2: ${file(var.keys["public"])}
+appuser:${ trimspace( file(var.keys["public"]) ) }
+appuser1:${ trimspace( file(var.keys["public"]) ) }
+appuser2:${ trimspace( file(var.keys["public"]) ) }
 EOF
 }
