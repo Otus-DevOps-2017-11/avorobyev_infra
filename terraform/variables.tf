@@ -13,10 +13,6 @@ variable keys {
   default     = {}
 }
 
-variable disk_image {
-  description = "Disk image"
-}
-
 variable zone {
   type        = "string"
   description = "GCP instance zone"

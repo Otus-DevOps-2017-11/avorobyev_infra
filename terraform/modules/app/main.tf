@@ -1,12 +1,14 @@
 resource "google_compute_instance" "app" {
+
   name         = "reddit-app"
   machine_type = "g1-small"
   zone         = "${var.zone}"
-  tags         = ["reddit-app"]
+
+  tags         = "${var.tags}"
 
   boot_disk {
     initialize_params {
-      image = "${var.app_disk_image}"
+      image = "${var.disk_image}"
     }
   }
 
@@ -37,5 +39,5 @@ resource "google_compute_firewall" "firewall_puma" {
   }
 
   source_ranges = ["0.0.0.0/0"]
-  target_tags   = ["reddit-app"]
+  target_tags   = "${var.tags}"
 }
