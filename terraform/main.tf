@@ -24,7 +24,9 @@ resource "google_compute_instance" "app" {
     network = "default"
 
     # использовать ephemeral IP для доступа из Интернет
-    access_config {}
+    access_config {
+      nat_ip = "${google_compute_address.app_ip.address}"
+    }
   }
 
   ##ключи
@@ -55,4 +57,9 @@ appuser:${ trimspace( file(var.keys["public"]) ) }
 appuser1:${ trimspace( file(var.keys["public"]) ) }
 appuser2:${ trimspace( file(var.keys["public"]) ) }
 EOF
+}
+
+resource "google_compute_address" "app_ip" {
+  name = "reddit-app-ip"
+  #address_type = "INTERNAL"
 }
