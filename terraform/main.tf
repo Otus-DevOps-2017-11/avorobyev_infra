@@ -1,16 +1,15 @@
 provider "google" {
   #version     = "1.4.0"
-  project     = "${var.project}"
-  region      = "${var.region}"
+  project = "${var.project}"
+  region  = "${var.region}"
 }
 
 resource "google_compute_instance" "app" {
-
-  name = "reddit-app"
+  name         = "reddit-app"
   machine_type = "g1-small"
-  zone = "${var.zone}"
+  zone         = "${var.zone}"
 
-  tags =[ "reddit-app" ]
+  tags = ["reddit-app"]
 
   # определение загрузочного диска
   boot_disk {
@@ -21,7 +20,6 @@ resource "google_compute_instance" "app" {
 
   # определение сетевого интерфейса
   network_interface {
-
     # сеть, к которой присоединить данный интерфейс
     network = "default"
 
@@ -35,24 +33,21 @@ resource "google_compute_instance" "app" {
   #}
 
   connection {
-    type = "ssh"
-    user = "appuser"
-    agent = false
+    type        = "ssh"
+    user        = "appuser"
+    agent       = false
     private_key = "${file(var.keys["private"])}"
   }
-
   provisioner "file" {
-    source = "files/puma.service"
+    source      = "files/puma.service"
     destination = "/tmp/puma.service"
   }
-
   provisioner "remote-exec" {
     script = "files/deploy.sh"
   }
 }
 
 resource "google_compute_firewall" "firewall_puma" {
-
   name = "allow-puma-default"
 
   # Название сети, в которой действует правило
@@ -61,7 +56,7 @@ resource "google_compute_firewall" "firewall_puma" {
   # Какой доступ разрешить
   allow {
     protocol = "tcp"
-    ports = ["9292"]
+    ports    = ["9292"]
   }
 
   # Каким адресам разрешаем доступ
@@ -73,6 +68,7 @@ resource "google_compute_firewall" "firewall_puma" {
 
 resource "google_compute_project_metadata_item" "project_keys" {
   key = "ssh-keys"
+
   value = <<EOF
 appuser:${ trimspace( file(var.keys["public"]) ) }
 appuser1:${ trimspace( file(var.keys["public"]) ) }

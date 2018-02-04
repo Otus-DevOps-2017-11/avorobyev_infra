@@ -4,13 +4,13 @@ variable project {
 
 variable region {
   description = "Region"
-  default = "europe-west1"
+  default     = "europe-west1"
 }
 
 variable keys {
   description = "Paths to the keys used for ssh access"
-  type = "map"
-  default = {}
+  type        = "map"
+  default     = {}
 }
 
 variable disk_image {
@@ -18,7 +18,7 @@ variable disk_image {
 }
 
 variable zone {
-  type = "string"
+  type        = "string"
   description = "GCP instance zone"
-  default = "europe-west1-d"
+  default     = "europe-west1-d"
 }
