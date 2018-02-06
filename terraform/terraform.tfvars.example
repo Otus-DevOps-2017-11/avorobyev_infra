@@ -1,0 +1,8 @@
+project = "your_project_id"
+
+disk_image = "reddit-base"
+
+keys = {
+  "private" = "~/.ssh/appuser",
+  "public" = "~/.ssh/appuser.pub"
+}

@@ -36,7 +36,7 @@
         "type": "shell",
         "inline": [
           ". libfunc.sh",
-          "as_root mongo_tasks",
+          "as_root ruby_tasks",
           "as_root mongo_tasks",
           "app_tasks",
           "as_root register_app_with_systemd"
