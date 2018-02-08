@@ -21,3 +21,9 @@ variable src_tags {
   description = "client instances' tags"
   default = ["reddit-app"]
 }
+
+variable keys {
+  description = "Paths to the keys used for ssh access"
+  type        = "map"
+  default     = {}
+}

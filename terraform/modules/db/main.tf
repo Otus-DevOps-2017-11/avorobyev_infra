@@ -18,9 +18,9 @@ resource "google_compute_instance" "db" {
     access_config = {}
   }
 
-  #metadata {
-  #  sshKeys = "appuser:${file(var.public_key_path)}"
-  #}
+  metadata {
+    sshKeys = "appuser:${file(var.keys["public"])}"
+  }
 }
 
 resource "google_compute_firewall" "firewall_mongo" {

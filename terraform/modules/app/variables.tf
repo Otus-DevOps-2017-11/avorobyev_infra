@@ -15,3 +15,9 @@ variable tags {
   description = "instance tags"
   default = ["reddit-app"]
 }
+
+variable keys {
+  description = "Paths to the keys used for ssh access"
+  type        = "map"
+  default     = {}
+}

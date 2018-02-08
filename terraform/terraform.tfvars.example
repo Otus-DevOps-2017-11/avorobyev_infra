@@ -6,3 +6,5 @@ keys = {
   "private" = "~/.ssh/appuser",
   "public" = "~/.ssh/appuser.pub"
 }
+
+adm_ip_range = "0.0.0.0/32"
