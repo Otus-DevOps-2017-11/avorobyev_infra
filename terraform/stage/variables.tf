@@ -30,7 +30,7 @@ variable db_disk_image {
 }
 
 variable adm_ip_range {
-  type = "string"
+  type        = "string"
   description = "ip allowed for admins"
-  default = "0.0.0.0/32"
+  default     = "0.0.0.0/32"
 }

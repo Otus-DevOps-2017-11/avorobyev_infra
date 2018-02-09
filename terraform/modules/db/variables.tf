@@ -1,4 +1,3 @@
-
 variable zone {
   type        = "string"
   description = "GCP instance zone"
@@ -11,15 +10,15 @@ variable disk_image {
 }
 
 variable tags {
-  type = "list"
+  type        = "list"
   description = "instance tags"
-  default = ["reddit-db"]
+  default     = ["reddit-db"]
 }
 
 variable src_tags {
-  type = "list"
+  type        = "list"
   description = "client instances' tags"
-  default = ["reddit-app"]
+  default     = ["reddit-app"]
 }
 
 variable keys {
