@@ -3,5 +3,6 @@
 *.tfstate.*.info
 *.tfstate.backup
 *.tfvars
+*.log
 .terraform/
 *variables.json
