@@ -136,3 +136,25 @@ gcloud compute instances create reddit-app \
 # Задание 9
 
 Все по инструкции, доп. задания мимо. Видны перспективы параметризации, можно развлекаться до бесконечности.
+
+# Задание 10
+
+Это задание дало возможность разобраться с установкой python окружения. Ansible решил ставить в виртуальное окружение, со своей версией интерпретатора и зависимостями.
+
+```bash
+virtualenv -p python2.7 ansible_env
+. ansible_env/bin/activate
+```
+
+## Дополнительные задачи
+
+### 1. Dynamic inventory
+
+Написал парсер ini -> json. Идея, конечно, не самая умная - переводить из формата, который уже читается, в другой, сопровождая ошибками. Но, эксперимента ради, сделал.
+
+```bash
+ansible/inv.sh --list #group host relationship
+ansible/inv.sh --host appserver #host1 variables
+ansible/inv.sh --host dbserver #host2 variables
+```
+Проект разборщика здесь  https://github.com/a-vorobyev/scripts
