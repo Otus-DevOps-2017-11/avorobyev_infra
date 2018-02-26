@@ -6,3 +6,4 @@
 *.log
 .terraform/
 *variables.json
+*.retry
