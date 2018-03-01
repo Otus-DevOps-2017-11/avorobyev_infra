@@ -8,5 +8,5 @@ all:
     db:
       hosts:
         dbserver:
-          ansible_host: 35.205.218.249
+          ansible_host: 35.187.179.247
 ...
