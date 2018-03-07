@@ -23,7 +23,8 @@
   - name: Configure app
     hosts: app
     vars:
-      db_host: 10.132.0.2
+      # db_host: 10.132.0.2
+      db_host: "{{ hostvars.dbserver.gcp_data.networkInterfaces[0].networkIP | mandatory }}"
     become: true
     tags: app-tag
 
