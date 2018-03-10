@@ -28,20 +28,9 @@
     }
   ],
   "provisioners": [
-      {
-        "type": "file",
-        "source": "scripts/libfunc.sh",
-        "destination": "{{user `workdir`}}/libfunc.sh"
-      },
-      {
-        "type": "shell",
-        "inline": [
-          ". libfunc.sh",
-          "as_root ruby_tasks"
-        ],
-        "remote_folder": "{{user `workdir`}}",
-        "remote_file": "installer.sh",
-        "inline_shebang": "/usr/bin/env bash"
-      }
+    {
+      "type": "ansible",
+      "playbook_file": "../ansible/packer_app.yml"
+    }
   ]
 }

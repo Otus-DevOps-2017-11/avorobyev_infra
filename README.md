@@ -158,3 +158,49 @@ ansible/inv.sh --host appserver #host1 variables
 ansible/inv.sh --host dbserver #host2 variables
 ```
 Проект разборщика здесь  https://github.com/a-vorobyev/scripts
+
+# Задание 11
+
+Попробовал разные способы организации playbook:
+ - book - one play
+ - book - many plays
+ - one book - one play, many books - one orchestrating book
+
+## Дополнительные задачи
+
+### 1. Интеграция с GCP
+Расширил решение динамического инвентаря из предыдущего ДЗ. В исходном файле для хостов через атрибут gcp_name задается идентификатор хоста в gcp. При запуске данные из gcp добавляются в поле gcp_data в выходном конейнере хоста.
+
+например, такая запись
+```ini
+[db]
+dbserver gcp_name=reddit-db
+```
+при вызове
+```bash
+./inventory-1.1/bin/inventory --host dbserver --file inventory.ini --gcp-project my-gcp-project-123 --gcp-zone europe-west1-d
+```
+будет представлена так
+```json
+{
+    "gcp_name": "reddit-db",
+    "gcp_data": {
+        "cpuPlatform": "Intel Haswell",
+        "creationTimestamp": "2018-03-09T14:00:15.040-08:00",
+        "deletionProtection": false
+
+        ...
+    },
+    "ansible_host": "35.205.81.3"
+}
+```
+
+внутри playbook есть доступ к данным хостов, например так можно получить внутренний адрес хоста базы данных:
+```yaml
+vars:
+  # db_host: 10.132.0.2
+  db_host: "{{ hostvars.dbserver.gcp_data.networkInterfaces[0].networkIP | mandatory }}"
+```
+
+## PS.нытье
+В общем, ansible представилась неким копромиссом между dev и ops, от которого не выиигрывают ни те, ни другие. Для dev он ограничен и ненатурален, для ops сложен и неинтуитивен. Может я что то не понял, но, дизайн, предлагающий хранение экземпляра сущности в разных местах файловой системы, разрушает целостное понимание структуры сайта и заставляет держать в голове кучу утилитарных данных. Лучше бы система представляла модель и API работы с ней на каком либо распространенном ЯП.

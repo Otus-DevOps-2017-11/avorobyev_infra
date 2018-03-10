@@ -1,0 +1,14 @@
+---
+- name: app environment provisioning
+  hosts: all
+  become: true
+  tasks:
+    - name: apt install ruby components
+      apt:
+        name: "{{ item }}"
+        state: present
+      with_items:
+        - ruby-full
+        - ruby-bundler
+        - build-essential
+...

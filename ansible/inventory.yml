@@ -4,9 +4,12 @@ all:
     app:
       hosts:
         appserver:
-          ansible_host: 104.199.11.233
+          ansible_host: 35.205.220.41
     db:
       hosts:
         dbserver:
-          ansible_host: 35.195.88.53
+          #ansible_host: 35.187.179.247
+          ansible_host: 35.195.30.88
+#app_external_ip = 35.205.220.41
+#db_external_ip = 35.195.30.88
 ...
