@@ -10,7 +10,10 @@ variable region {
 variable keys {
   description = "Paths to the keys used for ssh access"
   type        = "map"
-  default     = {}
+  default     =  {
+    public = "~/.ssh/appuser.pub",
+    private = "~/.ssh/appuser"
+  }
 }
 
 variable zone {

@@ -1,7 +1,8 @@
 resource "google_compute_instance" "db" {
-  name = "reddit-db"
 
-  machine_type = "g1-small"
+  name = "reddit-db-${var.env_tag}"
+
+  machine_type = "${var.machine_type}"
   zone         = "${var.zone}"
 
   tags = "${var.tags}"
@@ -13,6 +14,7 @@ resource "google_compute_instance" "db" {
   }
 
   network_interface {
+
     network = "default"
 
     access_config = {}
@@ -21,21 +23,4 @@ resource "google_compute_instance" "db" {
   metadata {
     sshKeys = "appuser:${file(var.keys["public"])}"
   }
-}
-
-resource "google_compute_firewall" "firewall_mongo" {
-  name = "allow-mongo-default"
-
-  network = "default"
-
-  allow {
-    protocol = "tcp"
-    ports    = ["27017"]
-  }
-
-  # правило применимо к инстансам с тегом ...
-  target_tags = "${var.tags}"
-
-  # порт будет доступен только для инстансов с тегом ...
-  source_tags = "${var.src_tags}"
 }

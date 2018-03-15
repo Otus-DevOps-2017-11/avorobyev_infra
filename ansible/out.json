@@ -1,0 +1,173 @@
+{
+    "_meta": {
+        "hostvars": {
+            "appserver": {
+                "gcp_name": "reddit-app-staage",
+                "gcp_data": {
+                    "cpuPlatform": "Intel Haswell",
+                    "creationTimestamp": "2018-03-15T04:05:11.577-07:00",
+                    "deletionProtection": false,
+                    "disks": [
+                        {
+                            "autoDelete": true,
+                            "boot": true,
+                            "deviceName": "persistent-disk-0",
+                            "index": 0,
+                            "interface": "SCSI",
+                            "kind": "compute#attachedDisk",
+                            "licenses": [
+                                "https://www.googleapis.com/compute/v1/projects/ubuntu-os-cloud/global/licenses/ubuntu-1604-xenial"
+                            ],
+                            "mode": "READ_WRITE",
+                            "source": "https://www.googleapis.com/compute/v1/projects/mindful-atlas-188816/zones/europe-west1-d/disks/reddit-app-staage",
+                            "type": "PERSISTENT",
+                            "guestOsFeatures": [
+                                {
+                                    "type": "VIRTIO_SCSI_MULTIQUEUE"
+                                }
+                            ]
+                        }
+                    ],
+                    "id": 4345151478513003913,
+                    "kind": "compute#instance",
+                    "labelFingerprint": "42WmSpB8rSM=",
+                    "machineType": "https://www.googleapis.com/compute/v1/projects/mindful-atlas-188816/zones/europe-west1-d/machineTypes/g1-small",
+                    "metadata": {
+                        "fingerprint": "6vf36whKsbE=",
+                        "items": [
+                            {
+                                "key": "sshKeys",
+                                "value": "appuser:ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDiz/vmDWERZOghkgi3GW/iunVmnXYUoKLlNdGv/69nR/h//+Ib6dnycYuPpvtwUsQhzBdH4OLE7yKGmQy8wBrxUEj7mdFmvfp+r6TAxG+hMwXd0laN6evR4JxpBUn1oizcjOq+M/e98KeRLE/LXh/U2Eql2t8oGGC9ktqa5EdgwHflX/81kEwInU8q9ybPKlyEDXzRV6RtzFbX8Nrx1YhmBL7o2PwG9w/qJDPYWZ9d5sHYf3cx59CmPherVxy9R9gryDvH10hbFBPpztTp5VgS3IA1MxnISYtenZKuejixdQmHOtsiU2N+wYuIeSbmX2TxCnNhQgxxpCVADqkeop3h appuser\n"
+                            }
+                        ],
+                        "kind": "compute#metadata"
+                    },
+                    "name": "reddit-app-staage",
+                    "networkInterfaces": [
+                        {
+                            "accessConfigs": [
+                                {
+                                    "kind": "compute#accessConfig",
+                                    "name": "external-nat",
+                                    "natIP": "35.205.62.191",
+                                    "type": "ONE_TO_ONE_NAT"
+                                }
+                            ],
+                            "kind": "compute#networkInterface",
+                            "name": "nic0",
+                            "network": "https://www.googleapis.com/compute/v1/projects/mindful-atlas-188816/global/networks/default",
+                            "networkIP": "10.132.0.3",
+                            "subnetwork": "https://www.googleapis.com/compute/v1/projects/mindful-atlas-188816/regions/europe-west1/subnetworks/default",
+                            "fingerprint": "2aiZSSUT5D8="
+                        }
+                    ],
+                    "scheduling": {
+                        "automaticRestart": true,
+                        "onHostMaintenance": "MIGRATE",
+                        "preemptible": false
+                    },
+                    "selfLink": "https://www.googleapis.com/compute/v1/projects/mindful-atlas-188816/zones/europe-west1-d/instances/reddit-app-staage",
+                    "startRestricted": false,
+                    "status": "RUNNING",
+                    "tags": {
+                        "fingerprint": "M-ggixIz-AU=",
+                        "items": [
+                            "reddit-app"
+                        ]
+                    },
+                    "zone": "https://www.googleapis.com/compute/v1/projects/mindful-atlas-188816/zones/europe-west1-d"
+                },
+                "ansible_host": "35.205.62.191"
+            },
+            "dbserver": {
+                "gcp_name": "reddit-db-staage",
+                "gcp_data": {
+                    "cpuPlatform": "Intel Haswell",
+                    "creationTimestamp": "2018-03-15T04:04:59.970-07:00",
+                    "deletionProtection": false,
+                    "disks": [
+                        {
+                            "autoDelete": true,
+                            "boot": true,
+                            "deviceName": "persistent-disk-0",
+                            "index": 0,
+                            "interface": "SCSI",
+                            "kind": "compute#attachedDisk",
+                            "licenses": [
+                                "https://www.googleapis.com/compute/v1/projects/ubuntu-os-cloud/global/licenses/ubuntu-1604-xenial"
+                            ],
+                            "mode": "READ_WRITE",
+                            "source": "https://www.googleapis.com/compute/v1/projects/mindful-atlas-188816/zones/europe-west1-d/disks/reddit-db-staage",
+                            "type": "PERSISTENT",
+                            "guestOsFeatures": [
+                                {
+                                    "type": "VIRTIO_SCSI_MULTIQUEUE"
+                                }
+                            ]
+                        }
+                    ],
+                    "id": 5855580632000228788,
+                    "kind": "compute#instance",
+                    "labelFingerprint": "42WmSpB8rSM=",
+                    "machineType": "https://www.googleapis.com/compute/v1/projects/mindful-atlas-188816/zones/europe-west1-d/machineTypes/g1-small",
+                    "metadata": {
+                        "fingerprint": "6vf36whKsbE=",
+                        "items": [
+                            {
+                                "key": "sshKeys",
+                                "value": "appuser:ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDiz/vmDWERZOghkgi3GW/iunVmnXYUoKLlNdGv/69nR/h//+Ib6dnycYuPpvtwUsQhzBdH4OLE7yKGmQy8wBrxUEj7mdFmvfp+r6TAxG+hMwXd0laN6evR4JxpBUn1oizcjOq+M/e98KeRLE/LXh/U2Eql2t8oGGC9ktqa5EdgwHflX/81kEwInU8q9ybPKlyEDXzRV6RtzFbX8Nrx1YhmBL7o2PwG9w/qJDPYWZ9d5sHYf3cx59CmPherVxy9R9gryDvH10hbFBPpztTp5VgS3IA1MxnISYtenZKuejixdQmHOtsiU2N+wYuIeSbmX2TxCnNhQgxxpCVADqkeop3h appuser\n"
+                            }
+                        ],
+                        "kind": "compute#metadata"
+                    },
+                    "name": "reddit-db-staage",
+                    "networkInterfaces": [
+                        {
+                            "accessConfigs": [
+                                {
+                                    "kind": "compute#accessConfig",
+                                    "name": "external-nat",
+                                    "natIP": "35.195.91.185",
+                                    "type": "ONE_TO_ONE_NAT"
+                                }
+                            ],
+                            "kind": "compute#networkInterface",
+                            "name": "nic0",
+                            "network": "https://www.googleapis.com/compute/v1/projects/mindful-atlas-188816/global/networks/default",
+                            "networkIP": "10.132.0.2",
+                            "subnetwork": "https://www.googleapis.com/compute/v1/projects/mindful-atlas-188816/regions/europe-west1/subnetworks/default",
+                            "fingerprint": "5mX9RtuXomM="
+                        }
+                    ],
+                    "scheduling": {
+                        "automaticRestart": true,
+                        "onHostMaintenance": "MIGRATE",
+                        "preemptible": false
+                    },
+                    "selfLink": "https://www.googleapis.com/compute/v1/projects/mindful-atlas-188816/zones/europe-west1-d/instances/reddit-db-staage",
+                    "startRestricted": false,
+                    "status": "RUNNING",
+                    "tags": {
+                        "fingerprint": "NQyRUqL7UTU=",
+                        "items": [
+                            "reddit-db"
+                        ]
+                    },
+                    "zone": "https://www.googleapis.com/compute/v1/projects/mindful-atlas-188816/zones/europe-west1-d"
+                },
+                "ansible_host": "35.195.91.185"
+            }
+        }
+    },
+    "app": [
+        "appserver"
+    ],
+    "db": [
+        "dbserver"
+    ],
+    "all": {
+        "vars": {
+            "env": "STAGE"
+        }
+    }
+}

@@ -20,3 +20,9 @@ variable keys {
   type        = "map"
   default     = {}
 }
+
+variable env_tag {
+  type = "string"
+  description = "environment tag"
+  default = "stage"
+}

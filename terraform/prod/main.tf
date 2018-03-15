@@ -9,6 +9,7 @@ module "db" {
   disk_image = "${var.db_disk_image}"
   zone       = "${var.zone}"
   keys       = "${var.keys}"
+  env_tag = "prod"
 }
 
 module "app" {
@@ -16,6 +17,7 @@ module "app" {
   disk_image = "${var.app_disk_image}"
   zone       = "${var.zone}"
   keys       = "${var.keys}"
+  env_tag = "prod"
 }
 
 module "vpc" {

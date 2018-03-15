@@ -15,14 +15,20 @@ variable tags {
   default     = ["reddit-db"]
 }
 
-variable src_tags {
-  type        = "list"
-  description = "client instances' tags"
-  default     = ["reddit-app"]
-}
-
 variable keys {
   description = "Paths to the keys used for ssh access"
   type        = "map"
   default     = {}
+}
+
+variable env_tag {
+  type = "string"
+  description = "environment tag"
+  default = "stage"
+}
+
+variable machine_type {
+  type = "string"
+  description = "gcp machine type"
+  default = "f1-small"
 }

@@ -1,5 +1,5 @@
 resource "google_compute_instance" "app" {
-  name         = "reddit-app"
+  name         = "reddit-app-${var.env_tag}"
   machine_type = "g1-small"
   zone         = "${var.zone}"
 
@@ -15,7 +15,7 @@ resource "google_compute_instance" "app" {
     network = "default"
 
     access_config = {
-      nat_ip = "${google_compute_address.app_ip.address}"
+      #nat_ip = "${google_compute_address.app_ip.address}"
     }
   }
 
@@ -24,19 +24,19 @@ resource "google_compute_instance" "app" {
   }
 }
 
-resource "google_compute_address" "app_ip" {
-  name = "reddit-app-ip"
-}
+#resource "google_compute_address" "app_ip" {
+#  name = "reddit-app-ip-${var.env_tag}"
+#}
 
-resource "google_compute_firewall" "firewall_puma" {
-  name    = "allow-puma-default"
-  network = "default"
-
-  allow {
-    protocol = "tcp"
-    ports    = ["9292"]
-  }
-
-  source_ranges = ["0.0.0.0/0"]
-  target_tags   = "${var.tags}"
-}
+#resource "google_compute_firewall" "firewall_puma" {
+#  name    = "allow-puma-default-${var.env_tag}"
+#  network = "default"
+#
+#  allow {
+#    protocol = "tcp"
+#    ports    = ["9292"]
+#  }
+#
+#  source_ranges = ["0.0.0.0/0"]
+#  target_tags   = "${var.tags}"
+#}
