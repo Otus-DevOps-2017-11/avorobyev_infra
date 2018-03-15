@@ -4,24 +4,48 @@ provider "google" {
   region  = "${var.region}"
 }
 
-module "db" {
-  source     = "../modules/db"
-  disk_image = "${var.db_disk_image}"
-  zone       = "${var.zone}"
-  keys       = "${var.keys}"
-  env_tag = "prod"
-}
+module nodes {
 
-module "app" {
-  source     = "../modules/app"
-  disk_image = "${var.app_disk_image}"
+  source = "../modules/nodes"
   zone       = "${var.zone}"
   keys       = "${var.keys}"
-  env_tag = "prod"
+  instances = [
+    {
+      name = "reddit-app-prod",
+      disk_image = "reddit-app-base",
+      machine_type = "g1-small",
+      tags = "app-prod"
+    },
+    {
+      name = "reddit-db-prod",
+      disk_image = "reddit-db-base",
+      machine_type = "g1-small",
+      tags = "db-prod"
+    }
+  ]
 }
 
 module "vpc" {
-  source = "../modules/vpc"
 
-  #source_ranges = ["${var.adm_ip_range}"]
+  source = "../modules/vpc"
+  env_tag = "prod"
+
+  access_table_external = [
+    {
+        tags_to = "app-prod,db-prod",
+        ports = "22"
+    },
+    {
+        tags_to = "app-prod",
+        ports = "80,443,9292"
+    }
+  ]
+
+  access_table = [
+    {
+        tags_from = "app-prod",
+        tags_to = "db-prod",
+        ports = "27017"
+    }
+  ]
 }

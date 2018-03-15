@@ -4,46 +4,47 @@ provider "google" {
   region  = "${var.region}"
 }
 
-module "db" {
-  source     = "../modules/db"
-  disk_image = "${var.db_disk_image}"
+module nodes {
+
+  source = "../modules/nodes"
   zone       = "${var.zone}"
   keys       = "${var.keys}"
-  env_tag = "stage"
-}
-
-module "app" {
-  source     = "../modules/app"
-  disk_image = "${var.app_disk_image}"
-  zone       = "${var.zone}"
-  keys       = "${var.keys}"
-  env_tag = "stage"
-}
-
-#module "vpc" {
-#  source = "../modules/vpc"
-#  #source_ranges = ["${var.adm_ip_range}"]
-#}
-
-module "vpcc" {
-
-  source = "../modules/vpcc"
-
-  access_table_from_all = [
+  instances = [
     {
-        tags_to = "reddit-app,reddit-db",
+      name = "reddit-app-stage",
+      disk_image = "reddit-app-base",
+      machine_type = "f1-micro",
+      tags = "app-stage"
+    },
+    {
+      name = "reddit-db-stage",
+      disk_image = "reddit-db-base",
+      machine_type = "f1-micro",
+      tags = "db-stage"
+    }
+  ]
+}
+
+module "vpc" {
+
+  source = "../modules/vpc"
+  env_tag = "stage"
+
+  access_table_external = [
+    {
+        tags_to = "app-stage,db-stage",
         ports = "22"
     },
     {
-        tags_to = "reddit-app",
+        tags_to = "app-stage",
         ports = "80,443,9292"
     }
   ]
 
   access_table = [
     {
-        tags_from = "reddit-app",
-        tags_to = "reddit-db",
+        tags_from = "app-stage",
+        tags_to = "db-stage",
         ports = "27017"
     }
   ]

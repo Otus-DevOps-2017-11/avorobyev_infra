@@ -10,5 +10,5 @@ then
 else
   git clone git@github.com:a-vorobyev/scripts.git "$PROJ_WD"
   cd "$PROJ_WD"
-fi &&\
+fi >/dev/null &&\
 ./gradlew -q run -Pmy_run_args="--gcp-project mindful-atlas-188816 --gcp-zone europe-west1-d --file ${WD}/inventory.ini $@"
