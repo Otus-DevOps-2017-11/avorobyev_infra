@@ -8,5 +8,12 @@
 
     roles:
       - app
-      - { role: jdauphant.nginx }
+
+    tasks:
+      - debug:
+          msg: "{{ nginx_conf }}"
+      - include_role:
+          name: jdauphant.nginx
+        vars:
+          nginx_sites: "{{ nginx_conf.nginx_sites }}"
 ...
