@@ -6,14 +6,16 @@
     vars:
       db_host: "{{ hostvars.dbserver.gcp_data.networkInterfaces[0].networkIP | mandatory }}"
 
-    roles:
-      - app
-
     tasks:
-      - debug:
-          msg: "{{ nginx_conf }}"
+
+      - include_role:
+          name: app
+
       - include_role:
           name: jdauphant.nginx
         vars:
           nginx_sites: "{{ nginx_conf.nginx_sites }}"
+
+      - debug:
+          msg: "{{ nginx_conf }}"
 ...
