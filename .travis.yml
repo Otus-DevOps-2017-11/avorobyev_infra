@@ -12,13 +12,15 @@ install:
 script:
   - ls -l
   - cd packer
-  - packer validate app_image.json
-  - packer validate db_image.json
+  - packer validate -var-file=variables.json.example app_image.json
+  - packer validate -var-file=variables.json.example db_image.json
   - cd ../terraform/stage
   - terraform init
-  - terraform validate
+  - terraform fmt
+  - terraform validate -var-file=terraform.tfvars.example
   - cd ../prod
   - terraform init
-  - terraform validate
+  - terraform fmt
+  - terraform validate -var-file=terraform.tfvars.example
   - cd ../..
-  - ansible-lint ansible/playbooks || true
+  - ansible-lint ansible/playbooks
