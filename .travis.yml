@@ -17,10 +17,10 @@ script:
   - cd ../terraform/stage
   - terraform init
   - terraform fmt
-  - terraform validate -var-file=terraform.tfvars.example
+  - terraform validate -var-file=../terraform.tfvars.example
   - cd ../prod
   - terraform init
   - terraform fmt
-  - terraform validate -var-file=terraform.tfvars.example
+  - terraform validate -var-file=../terraform.tfvars.example
   - cd ../..
   - ansible-lint ansible/playbooks
