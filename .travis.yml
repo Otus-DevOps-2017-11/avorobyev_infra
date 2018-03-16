@@ -3,10 +3,13 @@ python:
   - '2.7'
 install:
   - pip install ansible ansible-lint
+  - terraform --version
+  - packer --verlion
 script:
+  - ls -l
   - cd packer
-  - packer validate packer/app_image.json
-  - packer validate packer/db_image.json
+  - packer validate app_image.json
+  - packer validate db_image.json
   - cd ../terraform/stage
   - terraform init
   - terraform validate
