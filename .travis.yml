@@ -1,0 +1,27 @@
+language: python
+python:
+  - '2.7'
+before_install:
+  - packer --version || wget https://releases.hashicorp.com/packer/1.2.1/packer_1.2.1_linux_amd64.zip
+  - terraform --version || wget https://releases.hashicorp.com/terraform/0.11.4/terraform_0.11.4_linux_amd64.zip
+  - if ls *.zip 2>/dev/null; then mkdir bin && unzip *.zip -d bin && export PATH=$PATH:$PWD/bin; fi
+  - ssh-keygen -f ~/.ssh/appuser -t rsa -C appuser -P ''
+install:
+  - packer --version
+  - terraform --version
+  - pip install ansible ansible-lint
+script:
+  - ls -l
+  - cd packer
+  - packer validate -var-file=variables.json.example app_image.json
+  - packer validate -var-file=variables.json.example db_image.json
+  - cd ../terraform/stage
+  - terraform init
+  - terraform fmt
+  - terraform validate -var-file=../terraform.tfvars.example
+  - cd ../prod
+  - terraform init
+  - terraform fmt
+  - terraform validate -var-file=../terraform.tfvars.example
+  - cd ../..
+  - ansible-lint ansible/playbooks
