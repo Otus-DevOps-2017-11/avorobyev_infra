@@ -8,3 +8,7 @@
 *variables.json
 *.retry
 jdauphant.nginx
+*.pyc
+.vagrant/
+.molecule
+.cache
