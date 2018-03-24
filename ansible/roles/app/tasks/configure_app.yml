@@ -1,0 +1,20 @@
+---
+  - name: add unit file for puma
+    template:
+      src: puma.service.j2
+      dest: /etc/systemd/system/puma.service
+      #mode: 0644
+    notify: reload puma
+
+  - name: add env for puma
+    template:
+      src: db_config.j2
+      dest: /home/{{user_name}}/db_config
+      owner: "{{user_name}}"
+      group: "{{user_name}}"
+
+  - name: enable puma service
+    systemd:
+      name: puma
+      enabled: yes
+...

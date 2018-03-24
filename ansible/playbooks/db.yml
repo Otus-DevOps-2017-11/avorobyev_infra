@@ -1,5 +1,5 @@
 ---
-  - name: Configure db
+  - name: Install and configure db
     hosts: db
     become: true
 

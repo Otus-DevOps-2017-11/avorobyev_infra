@@ -3,5 +3,9 @@
 - name: Show info about the env this host belongs to
   debug:
     msg: "This host is in {{ env }} environment!!!"
+
 - import_tasks: install_mongo.yml
+  tags: install
+
 - import_tasks: configure_mongo.yml
+  tags: configure
