@@ -12,3 +12,4 @@ jdauphant.nginx
 .vagrant/
 .molecule
 .cache
+.pytest_cache
