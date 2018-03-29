@@ -6,13 +6,13 @@
       - name: checkout app
         git:
           repo: 'https://github.com/Otus-DevOps-2017-11/reddit.git'
-          dest: /home/appuser/reddit
+          dest: "/home/{{user_name}}/reddit"
           version: monolith
 
       - name: build app
         bundler:
           state: present
-          chdir: /home/appuser/reddit
+          chdir: "/home/{{user_name}}/reddit"
         notify: restart puma
 
     handlers:

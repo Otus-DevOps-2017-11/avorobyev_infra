@@ -1,15 +1,17 @@
 ---
-  - name: Configure app
+  - name: Install and configure app
     hosts: app
     become: true
 
-    vars:
-      db_host: "{{ hostvars.dbserver.gcp_data.networkInterfaces[0].networkIP | mandatory }}"
+    #vars:
+    #  db_host: "{{ hostvars.dbserver.gcp_data.networkInterfaces[0].networkIP | mandatory }}"
 
     tasks:
 
       - include_role:
           name: app
+        vars:
+          user_name: "{{deploy_user}}"
 
       - include_role:
           name: jdauphant.nginx
